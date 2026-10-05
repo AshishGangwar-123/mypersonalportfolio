@@ -701,6 +701,33 @@ selectors.resetData.addEventListener("click", resetPortfolioData);
 window.addEventListener("hashchange", syncAdminVisibility);
 document.body.classList.add("dark");
 
+const menuToggle = document.querySelector("#menuToggle");
+const mainNav = document.querySelector(".main-nav");
+if (menuToggle && mainNav) {
+  menuToggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const isOpen = mainNav.classList.toggle("is-open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+  });
+
+  mainNav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      mainNav.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open navigation menu");
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!mainNav.contains(event.target) && !menuToggle.contains(event.target)) {
+      mainNav.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open navigation menu");
+    }
+  });
+}
+
 function initThreeBackground() {
   const canvas = document.querySelector("#threeBackground");
   if (!canvas || !window.THREE) return;

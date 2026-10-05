@@ -396,6 +396,38 @@ main,
   color: var(--text);
 }
 
+.menu-toggle {
+  display: none;
+  position: relative;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  padding: 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  pointer-events: auto;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 2px;
+  margin: 4px 0;
+  border-radius: 99px;
+  background: var(--accent-strong);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+}
+
+body {
+  -webkit-overflow-scrolling: touch;
+}
+
 .icon-button {
   display: grid;
   width: 42px;
@@ -1536,6 +1568,30 @@ pre {
 
   .main-nav {
     display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .main-nav.is-open {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    left: 0;
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.55rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--surface) 96%, transparent);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(18px);
+    z-index: 2;
+  }
+
+  .main-nav.is-open a {
+    padding: 0.8rem 0.9rem;
   }
 }
 
